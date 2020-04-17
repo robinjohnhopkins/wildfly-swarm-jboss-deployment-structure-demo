@@ -1,0 +1,2 @@
+Dependencies: org.apache.cxf
+Dependencies: org.apache.cxf.impl

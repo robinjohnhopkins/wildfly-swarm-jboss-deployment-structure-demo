@@ -1,3 +1,18 @@
+## Wildfly swarm 
+
+WildFly Swarm is a framework based on the popular WildFly Java application server to enable the creation of small, standalone microservice-based applications. WildFly Swarm is capable of producing so-called just enough app-server to support each component of your system.
+
+https://docs.thorntail.io/2018.5.0/#creating-an-uberjar
+
+
+## FIX ADDED
+Specified below (see MANIFEST.MF to declare module dependencies)
+
+I have ALSO added an article which gave me the solution:
+
+HowToSpecifyADependency.md
+
+
 # wildfly-swarm-jboss-deployment-structure-demo
 
 WildFly Swarm Demo uses jboss-deployment-structure.xml .
@@ -15,6 +30,9 @@ java -jar target/wildfly-swarm-jboss-deployment-structure-demo-swarm.jar
 
 ``` sh
 curl 'localhost:8080/demo/api/hello'
+
+
+Hello World!
 ```
 
 ### With org.apache.cxf.jaxws.JaxWsProxyFactoryBean
@@ -22,3 +40,41 @@ curl 'localhost:8080/demo/api/hello'
 ``` sh
 curl 'localhost:8080/demo/api/hello?cxf-proxy=true'
 ```
+
+### MANIFEST.MF to declare module dependencies
+
+      This demo uses Apache CXF 3.1.6
+
+      When calling
+      curl 'localhost:8080/demo/api/hello'
+      Hello World!
+      was returned no problem
+
+      HOWEVER when calling curl 'localhost:8080/demo/api/hello?cxf-proxy=true'
+
+      java.lang.NoClassDefFoundError: org.apache.cxf.jaxws.JaxWsProxyFactoryBean
+
+      The class org.apache.cxf.jaxws.JaxWsProxyFactoryBean
+      is found in
+      .m2/repository/org/apache/cxf/cxf-rt-frontend-jaxws/3.1.6/cxf-rt-frontend-jaxws-3.1.6.jar
+
+
+      A similar named jar found in
+      https://github.com/suvo/jboss-eap/blob/master/modules/system/layers/base/org/apache/cxf/impl/main/module.xml
+      <module xmlns="urn:jboss:module:1.1" name="org.apache.cxf.impl">
+      <resource-root path="cxf-rt-frontend-jaxws-2.7.14.redhat-1.jar"/>
+
+      is mentioned on the web as being what is needed as a fix
+
+      i.e. add
+      <module name="org.apache.cxf" export="true" />
+      <module name="org.apache.cxf.impl" export="true" />
+
+      In my case the did not work
+
+      In the end I created
+      src/main/resources/META-INF/MANIFEST.MF
+        Dependencies: org.apache.cxf
+        Dependencies: org.apache.cxf.impl
+
+      This enabled running of the swarm jar and calling the end point that previously errored
