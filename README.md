@@ -102,4 +102,9 @@ in logs:
 2020-04-17 13:59:53,651 INFO  [stdout] (default task-1) aaa.bbb.Test class Loaded  [VERSION-1.0]
 2020-04-17 13:59:53,652 INFO  [stdout] (default task-1) aaa.bbb.Test sayHello() called v1
 
+
+
+2020-04-17 14:07:38,343 INFO  [stdout] (default task-1) aaa.bbb.Test class Loaded  [VERSION-1.1]
+2020-04-17 14:07:38,345 INFO  [stdout] (default task-1) aaa.bbb.Test sayHello() called v1.1
+
 ```
