@@ -27,6 +27,29 @@ public class HelloWorldServiceController {
     return client.sayHello();
   }
 
+  @Path("/test1")
+  @GET
+  public String get(@QueryParam("p1") String p1) {
+    if (p1 == null) {
+      return "{\"val\":\"null\"}";
+    } else {
+      if (p1.length() == 0) {
+        return "{\"val\":\"empty\"}";
+      } else {
+        return "{\"val\":\"" + p1 + "\"}";
+      }
+    }
+  }
+
+  @Path("/test2")
+  @GET
+  public String get2(@QueryParam("p1") String p1) {
+
+    aaa.bbb.Test test = new aaa.bbb.Test();
+
+    return "{\"val\":\"" + test.sayHello("hello") + "\"}";
+  }
+
   private HelloWorldService getClient() {
     QName serviceName = new QName("http://wildfly-swarm.io/HelloWorld", "HelloWorldService");
 

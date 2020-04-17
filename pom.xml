@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>wildflyswarm</groupId>
@@ -15,7 +14,7 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <version.wildfly-swarm>${project.version}</version.wildfly-swarm>
+    <version.wildfly-swarm>2.3.0.Final</version.wildfly-swarm>
     <version.javaee-api>7.0</version.javaee-api>
     <version.cxf>3.1.6</version.cxf>
 
@@ -52,7 +51,7 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.wildfly.swarm</groupId>
+        <groupId>io.thorntail</groupId>
         <artifactId>bom-all</artifactId>
         <version>${version.wildfly-swarm}</version>
         <type>pom</type>
@@ -74,14 +73,27 @@
       <version>${version.cxf}</version>
       <scope>provided</scope>
     </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>com.test.aaa</groupId>-->
+      <!--<artifactId>aaatest</artifactId>-->
+      <!--<version>1.2</version>-->
+    <!--</dependency>-->
+
+    <dependency>
+      <groupId>aaa.bbb</groupId>
+      <artifactId>ccc</artifactId>
+      <version>1.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
-        <groupId>org.wildfly.swarm</groupId>
-        <artifactId>wildfly-swarm-plugin</artifactId>
+        <groupId>io.thorntail</groupId>
+        <artifactId>thorntail-maven-plugin</artifactId>
         <version>${version.wildfly-swarm}</version>
         <executions>
           <execution>

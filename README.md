@@ -42,7 +42,7 @@ curl 'localhost:8080/demo/api/hello?cxf-proxy=true'
 ```
 
 ### MANIFEST.MF to declare module dependencies
-
+```
       This demo uses Apache CXF 3.1.6
 
       When calling
@@ -78,3 +78,28 @@ curl 'localhost:8080/demo/api/hello?cxf-proxy=true'
         Dependencies: org.apache.cxf.impl
 
       This enabled running of the swarm jar and calling the end point that previously errored
+```
+
+## test api
+
+```
+curl 'localhost:8080/demo/api/hello/test1'
+{"val":"null"}
+
+curl 'localhost:8080/demo/api/hello/test1?p1'
+{"val":"empty"}
+
+curl 'localhost:8080/demo/api/hello/test1?p1=red'
+{"val":"red"}
+
+
+curl 'localhost:8080/demo/api/hello/test2'
+{"val":"Mr. hello"}
+
+in logs:
+
+2020-04-17 13:59:45,911 INFO  [org.wildfly.swarm] (main) THORN99999: Thorntail is Ready
+2020-04-17 13:59:53,651 INFO  [stdout] (default task-1) aaa.bbb.Test class Loaded  [VERSION-1.0]
+2020-04-17 13:59:53,652 INFO  [stdout] (default task-1) aaa.bbb.Test sayHello() called v1
+
+```
